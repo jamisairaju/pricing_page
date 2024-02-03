@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* Set a dynamic background image */
+  background: url('C:/Users/Saira/OneDrive/Pictures/Saved Pictures/gif1.gif') center/cover no-repeat; /* Replace with your actual image path */
+  margin: 0; /* Remove default body margin */
+  font-family: Arial, sans-serif; /* Choose a suitable font */
+}
+h2{
+color: yellow;
+}
+p{
+color: white;}
+.columns {
+  float: left;
+  width: 33.3%;
+  padding: 8px;
+}
+
+.price {
+  list-style-type: none;
+  border: 1px solid black; /* Set the border color to black */
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+  background-color: #111;
+  color: white;
+  font-size: 25px;
+}
+li{
+color:black;
+border-color: black;
+}
+
+.price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+.price .grey {
+  background-color: #eee;
+  font-size: 20px;
+}
+.price .white{
+background-color:#FFFFFF;
+}
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+}
+
+</style>
+
+<script>
+  // Function to convert dollars to rupees
+  function convertToRupees(dollarAmount, exchangeRate) {
+    return (dollarAmount * exchangeRate).toFixed(2);
+  }
+
+  // Function to convert rupees to dollars
+  function convertToDollars(rupeeAmount, exchangeRate) {
+    return (rupeeAmount / exchangeRate).toFixed(2);
+  }
+
+  // Function to update prices on the page
+  function updatePrices(exchangeRate) {
+    // Select all elements with class 'grey' to update prices
+    var prices = document.querySelectorAll('.grey');
+
+    prices.forEach(function (priceElement) {
+      // Extract the amount and currency from the text content
+      var amountString = priceElement.textContent.match(/[0-9.]+/)[0]; // Extracts numbers and dots
+      var isRupees = priceElement.textContent.includes('₹');
+      var amount = parseFloat(amountString);
+
+      // Convert based on the currency
+      if (isRupees) {
+        var dollarAmount = convertToDollars(amount, exchangeRate);
+        priceElement.textContent = '$ ' + dollarAmount + ' / year';
+      } else {
+        var rupeeAmount = convertToRupees(amount, exchangeRate);
+        priceElement.textContent = '₹ ' + rupeeAmount + ' / year';
+      }
+    });
+  }
+
+  // Example: You can set the exchange rate dynamically or fetch it from an API
+  var exchangeRate = 75.00; // 1 Dollar = 75 Rupees
+
+  // Call the function to update prices with the initial exchange rate
+  updatePrices(exchangeRate);
+</script>
+</head>
+<body>
+
+<marquee><h2 style="text-align:center">AWS Pricing List</h2></marquee>
+<p style="text-align:center">Various plans based on user requirment</p>
+<center><button type="button" onclick="updatePrices(exchangeRate)">Convert to ₹ and $</button></center>
+<div class="columns">
+  <ul class="price">
+    <li class="header">Basic</li>
+    <li class="grey">$ 9.99 / year</li>
+    <li class="white">10GB Storage</li>
+    <li class="white">10 Emails</li>
+    <li class="white">10 Domains</li>
+    <li class="white">1GB Bandwidth</li>
+    <li class="white"><a href="#" class="button">Sign Up</a></li>
+  </ul>
+</div>
+
+<div class="columns">
+  <ul class="price">
+    <li class="header" style="background-color:#04AA6D">Pro</li>
+    <li class="grey">$ 24.99 / year</li>
+    <li class="white">25GB Storage</li>
+    <li class="white">25 Emails</li>
+    <li class="white">25 Domains</li>
+    <li class="white">2GB Bandwidth</li>
+    <li class="white"><a href="#" class="button">Sign Up</a></li>
+  </ul>
+</div>
+
+<div class="columns">
+  <ul class="price">
+    <li class="header">Premium</li>
+    <li class="grey">$ 49.99 / year</li>
+    <li class="white">50GB Storage</li>
+    <li class="white">50 Emails</li>
+    <li class="white">50 Domains</li>
+    <li class="white">5GB Bandwidth</li>
+    <li class="white"><a href="#" class="button">Sign Up</a></li>
+  </ul>
+</div>
+
+</body>
+</html>
